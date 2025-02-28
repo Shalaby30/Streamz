@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import Home from "./pages/Home"
-import Schedule from "./pages/schedule"
+import Schedule from "./pages/Schedule"
 import Live from "./pages/live"
 import StreamPage from "./pages/stream-page"
 import SportsMatches from './pages/sports-matches';
