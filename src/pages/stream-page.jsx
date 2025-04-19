@@ -19,7 +19,7 @@ const StreamPage = () => {
   useEffect(() => {
     const fetchMatchDetails = async () => {
       try {
-        const response = await axios.get(${API_BASE_URL}/match/${matchId})
+        const response = await axios.get(`${API_BASE_URL}/match/${matchId}`)
         setMatchDetails(response.data)
       } catch (error) {
         console.error("Error fetching match details:", error)
@@ -38,7 +38,7 @@ const StreamPage = () => {
   const fetchStreamsFromMatchId = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.get(${API_BASE_URL}/streams/${matchId})
+      const response = await axios.get(`${API_BASE_URL}/streams/${matchId}`)
       const allStreams = response.data
       setStreams(allStreams)
       if (allStreams.length > 0) {
@@ -55,7 +55,7 @@ const StreamPage = () => {
     setIsLoading(true)
     try {
       const streamPromises = sourcesArray.map(async (source) => {
-        const response = await axios.get(${API_BASE_URL}/stream/${source.source}/${source.id})
+        const response = await axios.get(`${API_BASE_URL}/stream/${source.source}/${source.id}`)
         return response.data
       })
 
@@ -119,7 +119,7 @@ const StreamPage = () => {
                   src={currentStream.embedUrl}
                   className="w-full h-full"
                   allowFullScreen
-                  title={Stream ${currentStream.streamNo}}
+                  title={`Stream ${currentStream.streamNo}`}
                 ></iframe>
               </div>
             ) : (
@@ -184,12 +184,12 @@ const StreamPage = () => {
                 <ul className="space-y-3">
                   {streams.map((stream) => (
                     <li
-                      key={${stream.source}-${stream.streamNo}}
-                      className={p-3 rounded-lg cursor-pointer transition-all ${
+                      key={`${stream.source}-${stream.streamNo}`}
+                      className={`p-3 rounded-lg cursor-pointer transition-all ${
                         currentStream === stream
                           ? "bg-primary/20 border border-primary/30"
                           : "bg-black hover:bg-black/80 border border-border/10 hover:border-primary/20"
-                      }}
+                      }`}
                       onClick={() => setCurrentStream(stream)}
                     >
                       <div className="flex justify-between items-center mb-1">
@@ -225,4 +225,4 @@ const StreamPage = () => {
   )
 }
 
-export default StreamPage;
+export default StreamPage
