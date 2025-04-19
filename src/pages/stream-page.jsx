@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useLocation, useParams, Link } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import axios from "axios"
-import { ArrowLeft, Loader2, Monitor, Globe, Wifi, Shield, ExternalLink } from "lucide-react"
+import { ArrowLeft, Loader2, Monitor, Globe, Wifi, Shield } from "lucide-react"
 
 const API_BASE_URL = "https://streamed.su/api"
 
@@ -12,9 +12,7 @@ const StreamPage = () => {
   const [currentStream, setCurrentStream] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [matchDetails, setMatchDetails] = useState(null)
-  const location = useLocation()
   const { matchId } = useParams()
-  const { title, sources } = location.state || {}
 
   useEffect(() => {
     const fetchMatchDetails = async () => {
@@ -26,51 +24,25 @@ const StreamPage = () => {
       }
     }
 
+    const fetchStreamsFromMatchId = async () => {
+      setIsLoading(true)
+      try {
+        const response = await axios.get(`${API_BASE_URL}/streams/${matchId}`)
+        const allStreams = response.data
+        setStreams(allStreams)
+        if (allStreams.length > 0) {
+          setCurrentStream(allStreams[0])
+        }
+      } catch (error) {
+        console.error("Error fetching streams:", error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
     fetchMatchDetails()
-
-    if (sources) {
-      fetchStreams(sources)
-    } else {
-      fetchStreamsFromMatchId()
-    }
-  }, [matchId, sources])
-
-  const fetchStreamsFromMatchId = async () => {
-    setIsLoading(true)
-    try {
-      const response = await axios.get(`${API_BASE_URL}/streams/${matchId}`)
-      const allStreams = response.data
-      setStreams(allStreams)
-      if (allStreams.length > 0) {
-        setCurrentStream(allStreams[0])
-      }
-    } catch (error) {
-      console.error("Error fetching streams:", error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const fetchStreams = async (sourcesArray) => {
-    setIsLoading(true)
-    try {
-      const streamPromises = sourcesArray.map(async (source) => {
-        const response = await axios.get(`${API_BASE_URL}/stream/${source.source}/${source.id}`)
-        return response.data
-      })
-
-      const streamResults = await Promise.all(streamPromises)
-      const allStreams = streamResults.flat()
-      setStreams(allStreams)
-      if (allStreams.length > 0) {
-        setCurrentStream(allStreams[0])
-      }
-    } catch (error) {
-      console.error("Error fetching streams:", error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
+    fetchStreamsFromMatchId()
+  }, [matchId])
 
   const getQualityBadge = (stream) => {
     if (stream.hd) {
@@ -95,7 +67,7 @@ const StreamPage = () => {
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div>
-            <h1 className="text-xl md:text-2xl font-bold">{matchDetails?.title || title}</h1>
+            <h1 className="text-xl md:text-2xl font-bold">{matchDetails?.title || "Match Details"}</h1>
             {matchDetails?.category && <p className="text-sm text-muted-foreground">{matchDetails.category}</p>}
           </div>
         </div>
@@ -113,7 +85,6 @@ const StreamPage = () => {
               </div>
             ) : currentStream ? (
               <div className="aspect-video bg-black rounded-xl overflow-hidden border border-border/10 shadow-xl relative">
-                {/* Transparent overlay to block clicks */}
                 <div className="absolute inset-0 z-10" style={{ pointerEvents: "none" }}></div>
                 <iframe
                   src={currentStream.embedUrl}
