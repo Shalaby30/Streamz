@@ -20,10 +20,10 @@ const Home = () => {
 
       <div className="py-8">
         {/* Football Matches */}
-        <PopularMatches sport="Football" apiUrl="https://streamed.su/api/matches/football/popular" />
+        <PopularMatches sport="Football" apiUrl="https://streamed.pk/api/matches/football/popular" />
 
         {/* Basketball Matches */}
-        <PopularMatches sport="Basketball" apiUrl="https://streamed.su/api/matches/basketball/popular" />
+        <PopularMatches sport="Basketball" apiUrl="https://streamed.pk/api/matches/basketball/popular" />
       </div>
     </div>
   )

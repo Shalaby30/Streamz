@@ -7,7 +7,7 @@ import { Search, Loader2, Calendar, Filter } from "lucide-react"
 import MatchCard from "./match-card"
 import { Pagination } from "./ui/pagination"
 
-const API_BASE_URL = "https://streamed.su/api"
+const API_BASE_URL = "https://streamed.pk/api"
 const ITEMS_PER_PAGE = 50
 
 const MatchesList = ({ type = "all" }) => {

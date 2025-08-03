@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useLocation, useParams, useNavigate } from "react-router-dom"
 import { ArrowLeft, Loader2, Monitor, Globe, Wifi, Shield, ExternalLink } from "lucide-react"
 
-const API_BASE_URL = "https://streamed.su/api"
+const API_BASE_URL = "https://streamed.pk/api"
 
 const makeApiRequest = async (endpoint, options = {}) => {
   const url = `${API_BASE_URL}${endpoint}`;

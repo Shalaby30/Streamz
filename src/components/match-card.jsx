@@ -52,7 +52,7 @@ const MatchCard = ({ match }) => {
               <div className="flex flex-col items-center">
                 {match.teams.home.badge ? (
                   <img
-                    src={`https://streamed.su/api/images/badge/${match.teams.home.badge}.webp`}
+                    src={`https://streamed.pk/api/images/badge/${match.teams.home.badge}.webp`}
                     className="w-16 h-16 transition-transform duration-300 group-hover:scale-110"
                   />
                 ) : (
@@ -77,7 +77,7 @@ const MatchCard = ({ match }) => {
               <div className="flex flex-col items-center">
                 {match.teams.away.badge ? (
                   <img
-                    src={`https://streamed.su/api/images/badge/${match.teams.away.badge}.webp`}
+                    src={`https://streamed.pk/api/images/badge/${match.teams.away.badge}.webp`}
                     className="w-16 h-16 transition-transform duration-300 group-hover:scale-110"
                   />
                 ) : (

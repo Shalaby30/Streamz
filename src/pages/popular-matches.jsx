@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import PropTypes from 'prop-types'
 import axios from "axios"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import MatchCard from "../components/match-card"
@@ -138,6 +139,11 @@ const PopularMatches = ({ sport, apiUrl }) => {
       </div>
     </div>
   )
+}
+
+PopularMatches.propTypes = {
+  sport: PropTypes.string.isRequired,
+  apiUrl: PropTypes.string.isRequired
 }
 
 export default PopularMatches

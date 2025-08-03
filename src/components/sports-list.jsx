@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { ChevronDown, Loader2 } from "lucide-react"
 
-const API_BASE_URL = "https://streamed.su/api"
+const API_BASE_URL = "https://streamed.pk/api"
 
 const SportsList = () => {
   const [sports, setSports] = useState([])

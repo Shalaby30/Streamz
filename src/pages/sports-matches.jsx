@@ -6,7 +6,7 @@ import axios from "axios"
 import { Search, Loader2, Calendar, Filter } from "lucide-react"
 import MatchCard from "../components/match-card"
 
-const API_BASE_URL = "https://streamed.su/api"
+const API_BASE_URL = "https://streamed.pk/api"
 
 const SportsMatches = () => {
   const { sportName } = useParams()
@@ -162,7 +162,7 @@ const SportsMatches = () => {
             </div>
             <p className="text-xl font-medium mb-2">No matches found</p>
             <p className="text-center max-w-md">
-              No matches found for "{searchTerm}". Try adjusting your search or filters.
+              No matches found for &quot;{searchTerm}&quot;. Try adjusting your search or filters.
             </p>
           </div>
         )}
